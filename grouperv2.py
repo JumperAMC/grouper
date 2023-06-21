@@ -8,6 +8,10 @@ def save_dataframe_to_excel(df, file_name):
             file_name += '.xlsx'
         df.to_excel(file_name, index=True)
         st.success("DataFrame saved to Excel file: " + file_name)
+        st.download_button(label="Click to Download Template File",
+                        data= df.to_excel(file_name, index=True),
+                        file_name="output.xlsx",
+                        mime='application/octet-stream')
     except Exception as e:
         st.error("An error occurred while saving the DataFrame: " + str(e))
 
