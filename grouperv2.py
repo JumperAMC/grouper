@@ -7,7 +7,7 @@ buffer = io.BytesIO()
 
 
 @st.cache
-def convert_to_csv(df3):
+def convert_to_csv(df):
     # IMPORTANT: Cache the conversion to prevent computation on every rerun
     return df.to_csv(index=False).encode('utf-8')
 
