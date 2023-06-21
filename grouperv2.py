@@ -73,8 +73,14 @@ def main():
                     df3 = df2.reindex(newindex)
                     st.write(df3)
                 if file_name is not None:
-                    with open('myfile.csv') as f:
-                        st.download_button('Download CSV', f)
+                    @st.experimental_memo
+                    def convert_df(df):
+                       return df.to_csv(index=True).encode('utf-8')
+
+
+                csv = convert_df(df3)
+
+                st.download_button("Press to Download",csv,"file.csv","text/csv",key='download-csv')
 
                         
                
