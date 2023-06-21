@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import streamlit as st
 import openpyxl
+import xlsxwriter
 from io import BytesIO
 
 def save_dataframe_to_excel(df, file_name):
