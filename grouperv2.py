@@ -89,4 +89,5 @@ def main():
                 wildcards = np.array([])
 
             newindex = []
-            for i, team in enumerate(reshape_array[0
+            for i, team in enumerate(reshape_array[0]):
+                newindex.extend((team,) + wildcards)
