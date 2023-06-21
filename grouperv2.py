@@ -89,4 +89,4 @@ def main():
                 wildcards = np.array([])
 
             newindex = []
-            for i, team in enumerate
+            for i, team in enumerate(reshape_array[0
