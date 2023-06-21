@@ -11,8 +11,8 @@ def save_dataframe_to_excel(df, file_name):
 
         st.download_button(label="Download Excel workbook", data=df.to_excel(file_name, index=True),file_name="workbook.xlsx", mime="application/vnd.ms-excel"
                            
-        except Exception as e:
-            st.error("An error occurred while saving the DataFrame: " + str(e))
+    except Exception as e:
+        st.error("An error occurred while saving the DataFrame: " + str(e))
 
 def main():
     st.title("Student Grouping App")
