@@ -9,7 +9,7 @@ def save_dataframe_to_excel(df, file_name):
             file_name += '.xlsx'
         
         excel_data = io.BytesIO()
-        with pd.ExcelWriter(excel_data, engine='xlsxwriter') as writer:
+        with pd.ExcelWriter(excel_data, engine='openpyxl') as writer:
             df.to_excel(writer, index=True)
             writer.save()
         excel_data.seek(0)
@@ -19,7 +19,6 @@ def save_dataframe_to_excel(df, file_name):
     
     except Exception as e:
         st.error("An error occurred while saving the DataFrame: " + str(e))
-        return None
 
 def main():
     st.title("Student Grouping App")
@@ -95,7 +94,7 @@ def main():
                             label="Download Excel workbook",
                             data=excel_file,
                             file_name=file_name,
-                            mime="application/vnd.ms-excel"
+                            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
                         )
                 else:
                     st.warning("Please enter a file name.")
