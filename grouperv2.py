@@ -11,7 +11,7 @@ def save_dataframe_to_excel(df, file_name):
         with BytesIO() as buffer:
             writer = pd.ExcelWriter(buffer, engine='xlsxwriter')
             df.to_excel(writer, index=True)
-            writer.save()
+            writer.close()
             buffer.seek(0)
             return buffer
 
