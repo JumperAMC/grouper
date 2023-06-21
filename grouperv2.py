@@ -3,22 +3,6 @@ import pandas as pd
 import streamlit as st
 import io
 
-def save_dataframe_to_excel(df, file_name):
-    try:
-        if not file_name.endswith('.xlsx'):
-            file_name += '.xlsx'
-        
-        excel_data = io.BytesIO()
-        with pd.ExcelWriter(excel_data, engine='openpyxl') as writer:
-            df.to_excel(writer, index=True)
-            writer.save()
-        excel_data.seek(0)
-        
-        st.success("DataFrame saved to Excel file: " + file_name)
-        return excel_data
-    
-    except Exception as e:
-        st.error("An error occurred while saving the DataFrame: " + str(e))
 
 def main():
     st.title("Student Grouping App")
