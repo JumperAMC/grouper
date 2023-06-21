@@ -79,7 +79,7 @@ def main():
                             label="Download Excel workbook",
                             data=excel_file,
                             file_name=file_name,
-                            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                            mime="application/vnd.ms-excel"
                         )
                
                 else:
