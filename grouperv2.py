@@ -72,7 +72,7 @@ def main():
                     df2 = dfrandom
                     df3 = df2.reindex(newindex)
                     st.write(df3)
-                if excel_file is not None:
+                if file_name is not None:
                     with open(file_path, 'rb') as my_file:
                         st.download_button(label = 'Download', data = my_file, file_name = 'filename.xlsx', mime = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') 
                         st.success("Excel file saved successfully.")
