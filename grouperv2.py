@@ -9,11 +9,12 @@ def save_dataframe_to_excel(df, file_name):
         if not file_name.endswith('.xlsx'):
             file_name += '.xlsx'
         with BytesIO() as buffer:
-            writer = pd.ExcelWriter(buffer, engine='openpyxl')
+            writer = pd.ExcelWriter(buffer, engine='xlsxwriter')
             df.to_excel(writer, index=True)
             writer.save()
             buffer.seek(0)
             return buffer
+
 
     except Exception as e:
         st.error("An error occurred while saving the DataFrame: " + str(e))
