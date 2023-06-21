@@ -11,10 +11,15 @@ def save_dataframe_to_excel(df, file_name):
         with BytesIO() as buffer:
             writer = pd.ExcelWriter(buffer, engine='openpyxl')
             df.to_excel(writer, index=True)
-            writer.save()
+            writer.book.save(buffer)
             writer.close()
             buffer.seek(0)
             return buffer
+
+    except Exception as e:
+        st.error("An error occurred while saving the DataFrame: " + str(e))
+        return None
+
 
 
     except Exception as e:
