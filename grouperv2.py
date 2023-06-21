@@ -71,6 +71,7 @@ def main():
                 if len(file_name) > 0:
                     df2 = dfrandom
                     df3 = df2.reindex(newindex)
+                    st.write(df3)
                     excel_file = save_dataframe_to_excel(df3, file_name)
                     if excel_file is not None:
                         st.success("Excel file saved successfully.")
@@ -80,7 +81,7 @@ def main():
                             file_name=file_name,
                             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
                         )
-                    
+               
                 else:
                     st.warning("Please enter a file name.")
            
@@ -90,6 +91,6 @@ def main():
     
     else:
         st.warning("No file selected.")
-st.write(df3)
+
 if __name__ == '__main__':
     main()
