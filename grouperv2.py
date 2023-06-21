@@ -1,15 +1,25 @@
 import numpy as np
 import pandas as pd
 import streamlit as st
+import io
 
 def save_dataframe_to_excel(df, file_name):
     try:
         if not file_name.endswith('.xlsx'):
             file_name += '.xlsx'
-        df.to_excel(file_name, index=True)
+        
+        excel_data = io.BytesIO()
+        with pd.ExcelWriter(excel_data, engine='xlsxwriter') as writer:
+            df.to_excel(writer, index=True)
+            writer.save()
+        excel_data.seek(0)
+        
         st.success("DataFrame saved to Excel file: " + file_name)
+        return excel_data
+    
     except Exception as e:
         st.error("An error occurred while saving the DataFrame: " + str(e))
+        return None
 
 def main():
     st.title("Student Grouping App")
@@ -78,13 +88,15 @@ def main():
                 if len(file_name) > 0:
                     df2 = dfrandom
                     df3 = df2.reindex(newindex)
-                    save_dataframe_to_excel(df3, file_name)
-                    st.download_button(
-                        label="Download Excel workbook",
-                        data=df3.to_excel,
-                        file_name=file_name,
-                        mime="application/vnd.ms-excel"
-                    )
+                    excel_file = save_dataframe_to_excel(df3, file_name)
+                    if excel_file is not None:
+                        st.success("Excel file saved successfully.")
+                        st.download_button(
+                            label="Download Excel workbook",
+                            data=excel_file,
+                            file_name=file_name,
+                            mime="application/vnd.ms-excel"
+                        )
                 else:
                     st.warning("Please enter a file name.")
         
