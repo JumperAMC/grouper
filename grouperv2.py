@@ -84,8 +84,8 @@ def main():
 
                         
                
-                else:
-                    st.warning("Please enter a file name.")
+            else:
+                st.warning("Please enter a file name.")
            
         
         except Exception as e:
