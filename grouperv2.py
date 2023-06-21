@@ -80,15 +80,16 @@ def main():
                             file_name=file_name,
                             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
                         )
-                    st.write(df3)
+                    
                 else:
                     st.warning("Please enter a file name.")
+           
         
         except Exception as e:
             st.error("An error occurred while loading the file: " + str(e))
     
     else:
         st.warning("No file selected.")
-
+st.write(df3)
 if __name__ == '__main__':
     main()
