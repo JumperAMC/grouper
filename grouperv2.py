@@ -96,6 +96,7 @@ def main():
                             file_name=file_name,
                             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
                         )
+                    print(df3)
                 else:
                     st.warning("Please enter a file name.")
         
