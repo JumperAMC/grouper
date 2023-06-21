@@ -72,15 +72,11 @@ def main():
                     df2 = dfrandom
                     df3 = df2.reindex(newindex)
                     st.write(df3)
-                    excel_file = df.to_excel('grouperoutput.xlsx', index=True)
-                    if excel_file is not None:
+                if excel_file is not None:
+                    with open(file_path, 'rb') as my_file:
+                        st.download_button(label = 'Download', data = my_file, file_name = 'filename.xlsx', mime = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') 
                         st.success("Excel file saved successfully.")
-                        st.download_button(
-                            label="Download Excel workbook",
-                            data=excel_file,
-                            file_name=file_name,
-                            mime="application/vnd.ms-excel"
-                        )
+                        
                
                 else:
                     st.warning("Please enter a file name.")
