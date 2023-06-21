@@ -7,24 +7,29 @@ from io import BytesIO
 
 
 def save_dataframe_to_excel(df, file_name):
-    try:
-        if not file_name.endswith('.xlsx'):
-            file_name += '.xlsx'
-        
-        with tempfile.NamedTemporaryFile(delete=False) as tmp_file:
-            file_path = tmp_file.name
-            writer = pd.ExcelWriter(file_path, engine='openpyxl')
-            df.to_excel(writer, index=True)
-            writer.save()
-        
-        with open(file_path, 'rb') as file:
-            excel_data = file.read()
-        
-        return excel_data
-    
-    except Exception as e:
-        st.error("An error occurred while saving the DataFrame: " + str(e))
-        return None
+    """Saves a Pandas DataFrame to an Excel file.
+
+    Args:
+        df (pd.DataFrame): The DataFrame to be saved.
+        file_name (str): The name of the Excel file.
+
+    Returns:
+        bytes: The Excel file data.
+    """
+
+    if not file_name.endswith('.xlsx'):
+        file_name += '.xlsx'
+
+    with tempfile.NamedTemporaryFile(delete=False) as tmp_file:
+        file_path = tmp_file.name
+        writer = pd.ExcelWriter(file_path, engine='openpyxl')
+        df.to_excel(writer, index=False)
+        writer.save()
+
+    with open(file_path, 'rb') as file:
+        excel_data = file.read()
+
+    return excel_data
 
 
 def main():
@@ -84,34 +89,4 @@ def main():
                 wildcards = np.array([])
 
             newindex = []
-            for i, team in enumerate(reshape_array[0]):
-                newindex.extend(reshape_array[:, i])
-            newindex.extend(wildcards)
-
-            # Output to Excel file
-            file_name = st.text_input("Enter the name of the Excel file:")
-            if st.button("Save as Excel"):
-                if len(file_name) > 0:
-                    df2 = dfrandom
-                    df3 = df2.reindex(newindex)
-                    excel_data = save_dataframe_to_excel(df3, file_name)
-                    if excel_data is not None:
-                        st.success("Excel file saved successfully.")
-                        st.download_button(
-                            "Download Excel file",
-                            excel_data,
-                            file_name,
-                            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-                        )
-                else:
-                    st.warning("Please enter a file name.")
-
-        except Exception as e:
-            st.error("An error occurred while loading the file: " + str(e))
-
-    else:
-        st.warning("No file selected.")
-
-
-if __name__ == '__main__':
-    main()
+            for i, team in enumerate
