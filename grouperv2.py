@@ -72,7 +72,7 @@ def main():
                     df2 = dfrandom
                     df3 = df2.reindex(newindex)
                     st.write(df3)
-                    excel_file = df.to_excel(file_name, index=True)
+                    excel_file = df.to_excel('grouperoutput.xlsx', index=True)
                     if excel_file is not None:
                         st.success("Excel file saved successfully.")
                         st.download_button(
