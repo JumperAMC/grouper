@@ -2,20 +2,27 @@ import numpy as np
 import pandas as pd
 import streamlit as st
 import openpyxl
+import tempfile
 from io import BytesIO
+
+
 
 def save_dataframe_to_excel(df, file_name):
     try:
         if not file_name.endswith('.xlsx'):
             file_name += '.xlsx'
-        with BytesIO() as buffer:
-            writer = pd.ExcelWriter(buffer, engine='openpyxl')
+        
+        with tempfile.NamedTemporaryFile(delete=False) as tmp_file:
+            file_path = tmp_file.name
+            writer = pd.ExcelWriter(file_path, engine='openpyxl')
             df.to_excel(writer, index=True)
-            writer.book.save(buffer)
-            writer.close()
-            buffer.seek(0)
-            return buffer
-
+            writer.save()
+        
+        with open(file_path, 'rb') as file:
+            excel_data = file.read()
+        
+        return excel_data
+    
     except Exception as e:
         st.error("An error occurred while saving the DataFrame: " + str(e))
         return None
