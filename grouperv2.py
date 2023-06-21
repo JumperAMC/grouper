@@ -6,7 +6,6 @@ import tempfile
 from io import BytesIO
 
 
-
 def save_dataframe_to_excel(df, file_name):
     try:
         if not file_name.endswith('.xlsx'):
@@ -27,11 +26,6 @@ def save_dataframe_to_excel(df, file_name):
         st.error("An error occurred while saving the DataFrame: " + str(e))
         return None
 
-
-
-    except Exception as e:
-        st.error("An error occurred while saving the DataFrame: " + str(e))
-        return None
 
 def main():
     st.title("Student Grouping App")
@@ -100,12 +94,12 @@ def main():
                 if len(file_name) > 0:
                     df2 = dfrandom
                     df3 = df2.reindex(newindex)
-                    excel_file = save_dataframe_to_excel(df3, file_name)
-                    if excel_file is not None:
+                    excel_data = save_dataframe_to_excel(df3, file_name)
+                    if excel_data is not None:
                         st.success("Excel file saved successfully.")
                         st.download_button(
                             "Download Excel file",
-                            excel_file,
+                            excel_data,
                             file_name,
                             'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
                         )
@@ -117,6 +111,7 @@ def main():
 
     else:
         st.warning("No file selected.")
+
 
 if __name__ == '__main__':
     main()
