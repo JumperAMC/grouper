@@ -1,8 +1,6 @@
 import numpy as np
 import pandas as pd
 import streamlit as st
-import openpyxl
-import xlsxwriter
 from io import BytesIO
 
 def save_dataframe_to_excel(df, file_name):
@@ -10,7 +8,7 @@ def save_dataframe_to_excel(df, file_name):
         if not file_name.endswith('.xlsx'):
             file_name += '.xlsx'
         with BytesIO() as buffer:
-            writer = pd.ExcelWriter(buffer, engine='xlsxwriter')
+            writer = pd.ExcelWriter(buffer, engine='openpyxl')
             df.to_excel(writer, index=True)
             writer.save()
             buffer.seek(0)
