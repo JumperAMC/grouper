@@ -73,9 +73,9 @@ def main():
                     df3 = df2.reindex(newindex)
                     st.write(df3)
                 if file_name is not None:
-                    with open(file_path, 'rb') as my_file:
-                        st.download_button(label = 'Download', data = my_file, file_name = 'filename.xlsx', mime = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') 
-                        st.success("Excel file saved successfully.")
+                    with open('myfile.csv') as f:
+                        st.download_button('Download CSV', f)
+
                         
                
                 else:
